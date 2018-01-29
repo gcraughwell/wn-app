@@ -25,7 +25,8 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback'
+      callbackURL: '/auth/google/callback',
+      proxy: true
     },
     //creates a new record of googleId user profile from google and .save() it to the db.
     (accessToken, refreshToken, profile, done) => {
