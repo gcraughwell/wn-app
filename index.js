@@ -7,12 +7,12 @@ const keys = require('./config/keys');
 //imports passportjs /google
 require('./dbmodels/User');
 require('./services/passport');
+const requireLogin = require('./middlewares/requireLogin');
 
 //moongoose connects to mongo lab database
 mongoose.connect(keys.mongoURI);
 
 const app = express();
-
 //cookieSession for sending user data
 app.use(
   cookieSession({
@@ -21,6 +21,11 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
+
+///check if the user is logged in
+module.export = app => {
+  app.post('/Dashboard', requireLogin, async (req, res) => {});
+};
 
 app.use(passport.initialize());
 app.use(passport.session());
